@@ -1,0 +1,253 @@
+/*
+ * @Description: 
+ * @Version: 1.0.0
+ * @Autor: lax
+ * @Date: 2020-04-08 10:38:49
+ * @LastEditors: lax
+ * @LastEditTime: 2020-04-08 10:39:55
+ */
+
+const axios = require("axios");
+
+const wxsdk = wx;
+
+const /* 默认申请API权限项 */
+  DEFAULT_API_LIST = [
+    "updateAppMessageShareData",
+    "updateTimelineShareData",
+    "onMenuShareTimeline",
+    "onMenuShareAppMessage",
+    "onMenuShareQQ",
+    "onMenuShareQZone",
+    "onMenuShareWeibo"
+  ],
+  /* 默认执行完成回调函数 */
+
+  DEFAULT_OVER = function() {
+    console.log("wx plugin is ready!");
+  },
+  /* 默认DEBUG模式 */
+
+  DEFAULT_DEBUG_STATE = false,
+  /* 默认标题 */
+
+  DEFAULT_TITLE = document.title,
+  /* 默认描述 */
+
+  DEFAULT_DESC = DEFAULT_TITLE,
+  /* 默认链接地址 */
+
+  DEFAULT_LINK = location.href,
+  /* 默认图片 */
+
+  DEFAULT_IMG = "",
+  /* 默认后端服务器地址 */
+
+  DEFAULT_SERVER_URL = "https://wx.server.1045fm.cn",
+  /* 默认后端测试服务器地址 */
+
+  DEFAULT_TEST_SERVER_URL = "http://172.27.14.236:8800",
+  /* 微信授权地址 */
+
+  AUTH_URL =
+    "https://open.weixin.qq.com/connect/oauth2/authorize?appid=APPID&redirect_uri=REDIRECT_URI&response_type=code&scope=SCOPE&state=STATE#wechat_redirect",
+  /* 默认测试用APPID */
+
+  DEFAULT_TEST_APPID = "wx884d34049d77fcd1",
+  /* 默认生成环境APPID */
+
+  DEFAULT_PRO_APPID = "wxbfaae54e7f89f3fa",
+  /* 默认后端服务器接口地址 */
+
+  DEFAULT_REDIRECT_URI_PATH = "/wx/redirect",
+  /* 默认状态参数 */
+
+  // DEFAULT_STATE = "",
+  /* 默认请求类型 */
+
+  DEFAULT_SCOPE_TYPE = ["snsapi_base", "snsapi_userinfo"];
+
+function wxProcessor(p) {
+  p = p || {};
+  let self_url = location.href.split("#")[0].toString(),
+    self = this;
+
+  /**
+   * @member {boolean} debug
+   * @memberof wx
+   * @inner
+   * @default false
+   */
+  this.debug = p.debug || DEFAULT_DEBUG_STATE;
+
+  /**
+   * @member {boolean} index
+   * @memberof wx
+   * @inner
+   * @ignore
+   */
+  this.indexUrl = p.index || self_url;
+
+  /**
+   * @member {string} server
+   * @memberof wx
+   * @inner
+   * @default dev/pro
+   */
+  this.server =
+    p.server || (this.debug ? DEFAULT_TEST_SERVER_URL : DEFAULT_SERVER_URL);
+
+  /**
+   * @member {string} appid
+   * @memberof wx
+   * @inner
+   * @default dev/pro
+   */
+  this.appid = p.appid || (this.debug ? DEFAULT_TEST_APPID : DEFAULT_PRO_APPID);
+
+  /**
+   * @member {string} scope
+   * @memberof wx
+   * @inner
+   * @default snsapi_userinfo
+   * @description snsapi_base or snsapi_userinfo
+   */
+  this.scope =
+    typeof p.scope == "string"
+      ? p.scope
+      : typeof p.scope == "number"
+      ? DEFAULT_SCOPE_TYPE[p.scope]
+      : DEFAULT_SCOPE_TYPE[1];
+
+  this.trigger = p.trigger ? p.trigger : null;
+
+  this.over = p.over || DEFAULT_OVER;
+
+  this.execute = function() {
+    axios
+      .get(self.server + "/wx/sign", {
+        params: {
+          url: self_url
+        }
+      })
+      .then(function(resp) {
+        let data = resp.data;
+        wxsdk.config({
+          debug: self.debug,
+          appId: data.appid,
+          timestamp: data.timestamp,
+          nonceStr: data.noncestr,
+          signature: data.signature,
+          jsApiList: self.jsApiListjsApiList
+        });
+
+        wxsdk.ready(function() {
+          self.debug && console.log("wx-ready");
+
+          /* 分享给朋友及分享到qq */
+          wxsdk.updateAppMessageShareData({
+            title: self.title,
+            desc: self.desc,
+            link: self.link,
+            imgUrl: self.img,
+            success: function() {},
+            cancel: function() {}
+          });
+
+          /* 分享朋友圈及分享到qq空间 */
+          wxsdk.updateTimelineShareData({
+            title: self.title,
+            link: self.link,
+            imgUrl: self.img,
+            success: function() {},
+            cancel: function() {}
+          });
+
+          /* 分享到腾讯微博 */
+          wxsdk.onMenuShareWeibo({
+            title: self.title,
+            desc: self.desc,
+            link: self.link,
+            imgUrl: self.img,
+            success: function() {},
+            cancel: function() {}
+          });
+
+          wxsdk.onMenuShareTimeline({
+            title: self.title,
+            link: self.link,
+            imgUrl: self.img,
+            success: function() {}
+          });
+
+          wxsdk.onMenuShareAppMessage({
+            title: self.title,
+            desc: self.desc,
+            link: self.link,
+            imgUrl: self.img,
+            type: "",
+            dataUrl: "",
+            success: function() {}
+          });
+
+          wxsdk.onMenuShareQQ({
+            title: self.title,
+            desc: self.desc,
+            link: self.link,
+            imgUrl: self.img,
+            success: function() {},
+            cancel: function() {}
+          });
+
+          wxsdk.onMenuShareQZone({
+            title: self.title,
+            desc: self.desc,
+            link: self.link,
+            imgUrl: self.img,
+            success: function() {},
+            cancel: function() {}
+          });
+        });
+
+        wxsdk.error(function() {
+          //alert("error");
+        });
+
+        self.over();
+      })
+      .catch(function(error) {
+        console.log("wxsdk load error:");
+        console.log(error);
+      });
+  };
+
+  /**
+   * @method
+   * @description 微信授权
+   * @memberof wx
+   * @member {function} auth
+   * @inner
+   */
+  this.auth = function() {
+    let url = AUTH_URL.replace("APPID", this.appid)
+      .replace("REDIRECT_URI", this.server + DEFAULT_REDIRECT_URI_PATH)
+      .replace("SCOPE", this.scope)
+      .replace("STATE", this.indexUrl);
+    window.location.href = url;
+  };
+
+  this.updateByWxSDK = function(p) {
+    p = p || {};
+    this.title = p.title || DEFAULT_TITLE;
+    this.debug = p.debug || DEFAULT_DEBUG_STATE;
+    this.desc = p.desc || DEFAULT_DESC;
+    this.link = p.link || DEFAULT_LINK;
+    this.img = p.img || DEFAULT_IMG;
+    this.jsApiList = p.list || DEFAULT_API_LIST;
+    this.over = p.over || DEFAULT_OVER;
+    this.trigger = p.trigger || null;
+    return this;
+  };
+}
+
+export default wxProcessor;
