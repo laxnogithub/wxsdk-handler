@@ -4,7 +4,7 @@
  * @Autor: lax
  * @Date: 2020-04-08 10:38:49
  * @LastEditors: lax
- * @LastEditTime: 2020-04-09 10:01:00
+ * @LastEditTime: 2020-04-09 17:53:42
  */
 
 const axios = require("axios");
@@ -114,7 +114,7 @@ function wxProcessor(p) {
           timestamp: data.timestamp,
           nonceStr: data.noncestr,
           signature: data.signature,
-          jsApiList: self.jsApiListjsApiList
+          jsApiList: self.jsApiList
         });
 
         wxsdk.ready(function() {
