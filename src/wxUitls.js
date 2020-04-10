@@ -4,7 +4,7 @@
  * @Autor: lax
  * @Date: 2020-04-08 10:38:49
  * @LastEditors: lax
- * @LastEditTime: 2020-04-09 17:53:42
+ * @LastEditTime: 2020-04-10 13:01:27
  */
 
 const axios = require("axios");
@@ -100,6 +100,7 @@ function wxProcessor(p) {
   this.over = p.over || DEFAULT_OVER;
 
   this.execute = function() {
+    this.updateByWxSDK();
     axios
       .get(self.server + "/wx/sign", {
         params: {
