@@ -4,7 +4,7 @@
  * @Autor: lax
  * @Date: 2020-04-08 10:38:49
  * @LastEditors: lax
- * @LastEditTime: 2020-04-23 16:46:54
+ * @LastEditTime: 2020-04-23 17:11:32
  */
 
 const axios = require("axios");
@@ -51,7 +51,7 @@ const
   DEFAULT_SERVER_URL = "https://wx.server.1045fm.cn",
 
   /* 默认后端测试服务器地址 */
-  DEFAULT_TEST_SERVER_URL = "https://wx.server.1045fm.cn/test",
+  DEFAULT_TEST_SERVER_URL = "https://wxt.server.1045fm.cn",
 
   /* 微信授权地址 */
   AUTH_URL =
