@@ -4,7 +4,7 @@
  * @Autor: lax
  * @Date: 2020-04-08 10:38:49
  * @LastEditors: lax
- * @LastEditTime: 2020-04-23 11:01:36
+ * @LastEditTime: 2020-04-23 16:46:54
  */
 
 const axios = require("axios");
@@ -51,7 +51,7 @@ const
   DEFAULT_SERVER_URL = "https://wx.server.1045fm.cn",
 
   /* 默认后端测试服务器地址 */
-  DEFAULT_TEST_SERVER_URL = "http://172.27.14.236:8800",
+  DEFAULT_TEST_SERVER_URL = "https://wx.server.1045fm.cn/test",
 
   /* 微信授权地址 */
   AUTH_URL =
@@ -98,6 +98,8 @@ function wxProcessor(p) {
   this.trigger = p.trigger ? p.trigger : null;
 
   this.over = p.over || DEFAULT_OVER;
+
+  this.updateByWxSDK = updateByWxSDK;
 
   this.updateByWxSDK(p);
 
@@ -214,8 +216,10 @@ function wxProcessor(p) {
     window.location.href = url;
   };
 
-  this.updateByWxSDK = function(p) {
-    p = p || {};
+}
+
+function updateByWxSDK(p){
+  p = p || {};
     this.title = p.title || DEFAULT_TITLE;
     this.debug = p.debug || DEFAULT_DEBUG_STATE;
     this.desc = p.desc || DEFAULT_DESC;
@@ -225,7 +229,6 @@ function wxProcessor(p) {
     this.over = p.over || DEFAULT_OVER;
     this.trigger = p.trigger || null;
     return this;
-  };
 }
 
 export default wxProcessor;
