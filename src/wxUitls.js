@@ -4,7 +4,7 @@
  * @Autor: lax
  * @Date: 2020-04-08 10:38:49
  * @LastEditors: lax
- * @LastEditTime: 2020-04-23 17:11:32
+ * @LastEditTime: 2020-04-26 17:20:28
  */
 
 const axios = require("axios");
@@ -74,7 +74,8 @@ const
 
 function wxProcessor(p) {
   p = p || {};
-  let self_url = location.href.split("#")[0].toString(),
+  let baseUrl = location.href.split("#/");
+  let self_url = baseUrl[0]+baseUrl[1],
     self = this;
 
   this.debug = p.debug || DEFAULT_DEBUG_STATE;
