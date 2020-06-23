@@ -1,10 +1,10 @@
 /*
- * @Description: 
- * @Version: 1.0.0
+ * @Description: wxHandler
+ * @Version: 1.0.8
  * @Autor: lax
  * @Date: 2020-04-08 10:38:49
  * @LastEditors: lax
- * @LastEditTime: 2020-04-26 17:20:28
+ * @LastEditTime: 2020-06-23 19:17:03
  */
 
 const axios = require("axios");
@@ -32,7 +32,7 @@ const
   /* 默认DEBUG模式 */
   DEFAULT_DEBUG_STATE = false,
 
-  /* 默认环境 */
+  /* 默认生产环境 */
   DEFAULT_PRO_STATE = false,
 
   /* 默认标题 */
@@ -60,7 +60,7 @@ const
   /* 默认测试用APPID */
   DEFAULT_TEST_APPID = "wx884d34049d77fcd1",
   
-  /* 默认生成环境APPID */
+  /* 默认生产环境APPID */
   DEFAULT_PRO_APPID = "wxbfaae54e7f89f3fa",
   
   /* 默认后端服务器接口地址 */
@@ -72,17 +72,14 @@ const
   /* 默认请求类型 */
   DEFAULT_SCOPE_TYPE = ["snsapi_base", "snsapi_userinfo"];
 
-function wxProcessor(p) {
-  p = p || {};
-  let baseUrl = location.href.split("#/");
-  let self_url = baseUrl[0]+baseUrl[1],
-    self = this;
+function wxProcessor(p) {p = p || {};
+  const self = this;
 
   this.debug = p.debug || DEFAULT_DEBUG_STATE;
 
   this.pro = p.pro || DEFAULT_PRO_STATE;
 
-  this.indexUrl = p.index || self_url;
+  this.indexUrl = p.index || this.getURL(true);
 
   this.server =
     p.server || (this.pro ? DEFAULT_SERVER_URL : DEFAULT_TEST_SERVER_URL);
@@ -93,8 +90,8 @@ function wxProcessor(p) {
     typeof p.scope == "string"
       ? p.scope
       : typeof p.scope == "number"
-      ? DEFAULT_SCOPE_TYPE[p.scope]
-      : DEFAULT_SCOPE_TYPE[1];
+        ? DEFAULT_SCOPE_TYPE[p.scope]
+        : DEFAULT_SCOPE_TYPE[1];
 
   this.trigger = p.trigger ? p.trigger : null;
 
@@ -215,6 +212,20 @@ function wxProcessor(p) {
       .replace("SCOPE", this.scope)
       .replace("STATE", this.indexUrl);
     window.location.href = url;
+  };
+
+  /**
+   * @method
+   * @description 获取网页地址
+   * @memberof wx
+   * @member {function} getURL
+   * @inner
+   */
+  this.getURL = function(is) {
+    let baseUrl = location.href;
+    if(!is) return baseUrl;
+    baseUrl = baseUrl.split("#/")
+    return baseUrl[0]+baseUrl[1];
   };
 
 }
