@@ -4,7 +4,7 @@
  * @Autor: lax
  * @Date: 2020-04-08 10:38:49
  * @LastEditors: lax
- * @LastEditTime: 2020-06-23 19:17:03
+ * @LastEditTime: 2020-07-05 15:26:03
  */
 
 const axios = require("axios");
@@ -228,6 +228,25 @@ function wxProcessor(p) {p = p || {};
     return baseUrl[0]+baseUrl[1];
   };
 
+  /**
+   * @method
+   * @description 处理图片地址
+   * @memberof wx
+   * @member {function} _getImg
+   * @inner
+   */
+  this._getImg = function(path){
+    if(path.indexOf("http") != -1){
+      return path;
+    }esle{
+      return  window.location.protocol +
+      "//" +
+      window.location.host +
+      window.location.pathname + path;
+    }
+
+  }
+
 }
 
 function updateByWxSDK(p){
@@ -236,7 +255,7 @@ function updateByWxSDK(p){
     this.debug = p.debug || DEFAULT_DEBUG_STATE;
     this.desc = p.desc || DEFAULT_DESC;
     this.link = p.link || DEFAULT_LINK;
-    this.img = p.img || DEFAULT_IMG;
+    this.img = this._getImg(p.img || DEFAULT_IMG);
     this.jsApiList = p.list || DEFAULT_API_LIST;
     this.over = p.over || DEFAULT_OVER;
     this.trigger = p.trigger || null;
