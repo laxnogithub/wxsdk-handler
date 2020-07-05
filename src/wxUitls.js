@@ -4,7 +4,7 @@
  * @Autor: lax
  * @Date: 2020-04-08 10:38:49
  * @LastEditors: lax
- * @LastEditTime: 2020-07-05 16:59:41
+ * @LastEditTime: 2020-07-05 17:07:07
  */
 
 const axios = require("axios");
@@ -79,7 +79,7 @@ function wxProcessor(p) {p = p || {};
 
   this.pro = p.pro || DEFAULT_PRO_STATE;
 
-  this.indexUrl = p.index || this.getURL(true);
+  this.indexUrl = p.index || getURL(true);
 
   this.server =
     p.server || (this.pro ? DEFAULT_SERVER_URL : DEFAULT_TEST_SERVER_URL);
@@ -96,6 +96,8 @@ function wxProcessor(p) {p = p || {};
   this.trigger = p.trigger ? p.trigger : null;
 
   this.over = p.over || DEFAULT_OVER;
+
+  this.updateByWxSDK = updateByWxSDK;
 
   this.updateByWxSDK(p);
 
@@ -211,52 +213,56 @@ function wxProcessor(p) {p = p || {};
       .replace("STATE", this.indexUrl);
     window.location.href = url;
   };
+}
 
-  /**
-   * @method
-   * @description 获取网页地址
-   * @memberof wx
-   * @member {function} getURL
-   * @inner
-   */
-  this.getURL = function(is) {
-    let baseUrl = location.href;
-    if(!is) return baseUrl;
-    baseUrl = baseUrl.split("#/")
-    return baseUrl[0]+baseUrl[1];
-  };
 
-  /**
-   * @method
-   * @description 处理图片地址
-   * @memberof wx
-   * @member {function} _getImg
-   * @inner
-   */
-  this._getImg = function(path){
-    if(path.indexOf("http") != -1){
-      return path;
-    }else{
-      return  window.location.protocol +
-      "//" +
-      window.location.host +
-      window.location.pathname + path;
-    }
+
+
+
+
+/**
+ * @method
+ * @description 获取网页地址
+ * @memberof wx
+ * @member {function} getURL
+ * @inner
+ */
+function getURL(is) {
+  let baseUrl = location.href;
+  if(!is) return baseUrl;
+  baseUrl = baseUrl.split("#/")
+  return baseUrl[0]+baseUrl[1];
+};
+
+/**
+ * @method
+ * @description 处理图片地址
+ * @memberof wx
+ * @member {function} _getImg
+ * @inner
+ */
+function _getImg(path){
+  if(path.indexOf("http") != -1){
+    return path;
+  }else{
+    return  window.location.protocol +
+    "//" +
+    window.location.host +
+    window.location.pathname + path;
   }
+}
 
-  this.updateByWxSDK = function (p){
-    p = p || {};
-      this.title = p.title || DEFAULT_TITLE;
-      this.debug = p.debug || DEFAULT_DEBUG_STATE;
-      this.desc = p.desc || DEFAULT_DESC;
-      this.link = p.link || DEFAULT_LINK;
-      this.img = this._getImg(p.img || DEFAULT_IMG);
-      this.jsApiList = p.list || DEFAULT_API_LIST;
-      this.over = p.over || DEFAULT_OVER;
-      this.trigger = p.trigger || null;
-      return this;
-  }
-
+function updateByWxSDK(p){
+  p = p || {};
+    this.title = p.title || DEFAULT_TITLE;
+    this.debug = p.debug || DEFAULT_DEBUG_STATE;
+    this.desc = p.desc || DEFAULT_DESC;
+    this.link = p.link || DEFAULT_LINK;
+    this.img = _getImg(p.img || DEFAULT_IMG);
+    this.jsApiList = p.list || DEFAULT_API_LIST;
+    this.over = p.over || DEFAULT_OVER;
+    this.trigger = p.trigger || null;
+    return this;
 }
 
 

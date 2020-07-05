@@ -2,7 +2,7 @@
   "name": "vue-wx-tools",
   "main": "./src/index.js",
   "description": "vue微信工具",
-  "version": "1.1.2",
+  "version": "1.1.4",
   "private": false,
   "author": {
     "name": "lax",
