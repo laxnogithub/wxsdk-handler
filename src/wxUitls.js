@@ -4,7 +4,7 @@
  * @Autor: lax
  * @Date: 2020-04-08 10:38:49
  * @LastEditors: lax
- * @LastEditTime: 2020-07-05 16:50:18
+ * @LastEditTime: 2020-07-05 16:52:13
  */
 
 const axios = require("axios");
@@ -238,7 +238,7 @@ function wxProcessor(p) {p = p || {};
   this._getImg = function(path){
     if(path.indexOf("http") != -1){
       return path;
-    }esle{
+    }else{
       return  window.location.protocol +
       "//" +
       window.location.host +
