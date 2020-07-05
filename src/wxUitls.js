@@ -4,7 +4,7 @@
  * @Autor: lax
  * @Date: 2020-04-08 10:38:49
  * @LastEditors: lax
- * @LastEditTime: 2020-07-05 17:07:07
+ * @LastEditTime: 2020-07-05 18:25:06
  */
 
 const axios = require("axios");
@@ -105,7 +105,7 @@ function wxProcessor(p) {p = p || {};
     axios
       .get(self.server + "/wx/sign", {
         params: {
-          url: self_url
+          url: getURL(true)
         }
       })
       .then(function(resp) {
@@ -230,7 +230,9 @@ function wxProcessor(p) {p = p || {};
 function getURL(is) {
   let baseUrl = location.href;
   if(!is) return baseUrl;
+  if(baseUrl.indexOf("#") == -1)return baseUrl;
   baseUrl = baseUrl.split("#/")
+  console.log(baseUrl[0]+baseUrl[1])
   return baseUrl[0]+baseUrl[1];
 };
 
