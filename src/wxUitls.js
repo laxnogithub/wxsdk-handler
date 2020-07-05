@@ -4,7 +4,7 @@
  * @Autor: lax
  * @Date: 2020-04-08 10:38:49
  * @LastEditors: lax
- * @LastEditTime: 2020-07-05 15:26:03
+ * @LastEditTime: 2020-07-05 16:50:18
  */
 
 const axios = require("axios");
@@ -185,13 +185,13 @@ function wxProcessor(p) {p = p || {};
             success: function() {},
             cancel: function() {}
           });
+
+          self.over();
         });
 
         wxsdk.error(function() {
           //alert("error");
         });
-
-        self.over();
       })
       .catch(function(error) {
         console.log("wxsdk load error:");
