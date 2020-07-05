@@ -4,7 +4,7 @@
  * @Autor: lax
  * @Date: 2020-04-08 10:38:49
  * @LastEditors: lax
- * @LastEditTime: 2020-07-05 16:52:13
+ * @LastEditTime: 2020-07-05 16:59:41
  */
 
 const axios = require("axios");
@@ -96,8 +96,6 @@ function wxProcessor(p) {p = p || {};
   this.trigger = p.trigger ? p.trigger : null;
 
   this.over = p.over || DEFAULT_OVER;
-
-  this.updateByWxSDK = updateByWxSDK;
 
   this.updateByWxSDK(p);
 
@@ -244,22 +242,22 @@ function wxProcessor(p) {p = p || {};
       window.location.host +
       window.location.pathname + path;
     }
+  }
 
+  this.updateByWxSDK = function (p){
+    p = p || {};
+      this.title = p.title || DEFAULT_TITLE;
+      this.debug = p.debug || DEFAULT_DEBUG_STATE;
+      this.desc = p.desc || DEFAULT_DESC;
+      this.link = p.link || DEFAULT_LINK;
+      this.img = this._getImg(p.img || DEFAULT_IMG);
+      this.jsApiList = p.list || DEFAULT_API_LIST;
+      this.over = p.over || DEFAULT_OVER;
+      this.trigger = p.trigger || null;
+      return this;
   }
 
 }
 
-function updateByWxSDK(p){
-  p = p || {};
-    this.title = p.title || DEFAULT_TITLE;
-    this.debug = p.debug || DEFAULT_DEBUG_STATE;
-    this.desc = p.desc || DEFAULT_DESC;
-    this.link = p.link || DEFAULT_LINK;
-    this.img = this._getImg(p.img || DEFAULT_IMG);
-    this.jsApiList = p.list || DEFAULT_API_LIST;
-    this.over = p.over || DEFAULT_OVER;
-    this.trigger = p.trigger || null;
-    return this;
-}
 
 export default wxProcessor;
