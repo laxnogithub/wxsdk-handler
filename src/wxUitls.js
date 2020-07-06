@@ -4,7 +4,7 @@
  * @Autor: lax
  * @Date: 2020-04-08 10:38:49
  * @LastEditors: lax
- * @LastEditTime: 2020-07-05 18:25:06
+ * @LastEditTime: 2020-07-06 14:40:45
  */
 
 const axios = require("axios");
@@ -101,9 +101,10 @@ function wxProcessor(p) {p = p || {};
 
   this.updateByWxSDK(p);
 
-  this.execute = function() {
+  this.execute = function(isnew) {
+    const requestPath = isnew?"/wx/v2/sign":"/wx/sign";
     axios
-      .get(self.server + "/wx/sign", {
+      .get(self.server + requestPath, {
         params: {
           url: getURL(true)
         }
