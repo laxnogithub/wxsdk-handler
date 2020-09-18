@@ -4,8 +4,9 @@
  * @Autor: lax
  * @Date: 2020-04-08 10:38:49
  * @LastEditors: lax
- * @LastEditTime: 2020-09-17 16:20:38
+ * @LastEditTime: 2020-09-18 16:03:00
  */
+
 
 const path = require('path');
 const DEFAULT = require(path.join(__dirname,'./default'));
@@ -208,6 +209,10 @@ function updateByWxSDK(p){
     this.over = p.over || DEFAULT.OVER;
     this.trigger = p.trigger || null;
     return this;
+}
+
+function getWorkspace(){
+  return path.join(__dirname,"./../../../")
 }
 
 
