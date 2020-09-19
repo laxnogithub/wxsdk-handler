@@ -2,7 +2,7 @@
 
 # how to use
 
-## step one: import this tools
+## step 1: import this tools
 
 ### 1.use vue (in: main.js)
 
@@ -18,11 +18,12 @@ import wxHandler from "wxsdk-handler";
 new wxHandler({ options });
 ```
 
-## step two: set options
+## step 2: set options
 options = wx.js > options.config > default config
 
 
-1. wx.js
+### 1. use wx.js
+
 create wx.js in your ${workspace}/wx.js
 ```
 module.exports = {
@@ -34,27 +35,26 @@ module.exports = {
 
 add wx.js path to options.configFile
 ```
-new wxHandler({
-    { 
-        configFile: require("./../wx.js"),
-    }
-});
+options: {
+    configFile: require("./../wx.js"),
+    //or
+    configFile: "wx.js path (must absolute path)"
+}
 ```
 
-2. options.config
+### 2. use options.config
 
 ```
-new wxHandler({
-    { 
+options: {
+    config: { 
         appid: "xxxx",
 	    server: "http://localhost:8001/",
 	    path: "wx/v2/sign",
     }
-});
-
+};
 ```
 
-3. default config
+### 3. default config
 
 ```
 {
