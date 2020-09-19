@@ -101,6 +101,9 @@ wx.share().auth();
 # options
 
 ## configFile
+default: null
+
+wx config file or file path
 
 ## config
 
@@ -145,59 +148,66 @@ wx ready callback function
 
 ### config.jsApi
 default: 
-	"updateAppMessageShareData"
-	"updateTimelineShareData"
-	"onMenuShareTimeline"
-	"onMenuShareAppMessage"
-	"onMenuShareQQ"
-	"onMenuShareQZone"
-	"onMenuShareWeibo"
+
+"updateAppMessageShareData"
+
+"updateTimelineShareData"
+
+"onMenuShareTimeline"
+
+"onMenuShareAppMessage"
+
+"onMenuShareQQ"
+
+"onMenuShareQZone"
+
+"onMenuShareWeibo"
 
 wxsdk api
 
-## share options
+# share options
 
-### title
+## title
 default: document.title
 
 wx share title
 
-### desc
+## desc
 default: title
 
 wx share desc
 
-### link
+## link
 default: location.href
 
 wx share link
 
-### imgUrl
+## imgUrl
 default: null
 
 wx share img url
 
-### success
+## success
 default: null
 
 wx share success function
 
-### fail
+## fail
 default: null
 
 wx share fail function
 
-### cancel
+## cancel
 default: null
 
 wx share cancel function
 
-### tigger
+## tigger
 default: null
 
 wx share tigger function
 
-### complete
+## complete
 default: null
 
 wx share complete function
