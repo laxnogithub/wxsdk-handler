@@ -4,7 +4,7 @@
  * @Autor: lax
  * @Date: 2020-04-07 20:45:54
  * @LastEditors: lax
- * @LastEditTime: 2020-09-18 18:08:57
+ * @LastEditTime: 2020-09-19 17:56:39
  -->
 <template>
 	<div id="app">123</div>
@@ -28,18 +28,17 @@
 </style>
 
 <script>
-import wxHandler from "./../src/wx.js";
-import path from "path";
 export default {
 	name: "vue",
 	data: () => {
 		return {};
 	},
 	created() {
-		const url = path.resolve(__dirname, "./");
-		console.log(url);
-		const wx = new wxHandler({ configPath: url, configName: "wx.js" });
-		console.log(wx.__getConfig());
+		const wx = this.$wx;
+		wx.auth().share({
+			title: "1234",
+			desc: "desc",
+		});
 	},
 };
 </script>

@@ -1,15 +1,16 @@
 {
-  "name": "vue-wx-tools",
-  "main": "./src/index.js",
-  "description": "vue微信工具",
-  "version": "1.2.0",
+  "name": "wxsdk-handler",
+  "main": "package/wx.js",
+  "description": "h5-微信封装工具",
+  "version": "1.0.0",
   "private": false,
+  "license": "MIT",
   "author": {
     "name": "lax",
-    "email": "lax263@ztrg.com"
+    "email": "1546356935@qq.com"
   },
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "vue-cli-service serve examples/main.js",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "test:e2e": "vue-cli-service test:e2e",
@@ -28,10 +29,13 @@
     "sass": "^1.26.10",
     "sass-loader": "^10.0.2",
     "vue-template-compiler": "^2.6.12",
-    "webpack-merge": "^5.1.4"
+    "webpack-merge": "^5.1.4",
+    "vue": "^2.6.12"
   },
   "dependencies": {
-    "axios": "^0.20.0",
-    "vue": "^2.6.12"
-  }
+    "axios": "^0.20.0"
+  },
+  "keywords":[
+    "vue","webpack","wx","wxsdk","jweixin","plugin","h5","handler"
+  ]
 }

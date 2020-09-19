@@ -4,7 +4,7 @@
  * @Autor: lax
  * @Date: 2020-04-01 12:54:53
  * @LastEditors: lax
- * @LastEditTime: 2020-09-15 16:00:07
+ * @LastEditTime: 2020-09-19 13:20:51
  */
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require("path");
@@ -13,13 +13,13 @@ module.exports = {
 	 * test view path for the local debug
 	 * ##################################
 	 */
-	pages: {
-		index: {
-			entry: "./examples/main.js",
-			template: "./public/index.html",
-			filename: "index.html",
-		},
-	},
+	// pages: {
+	// 	index: {
+	// 		entry: "./examples/main.js",
+	// 		template: "./public/index.html",
+	// 		filename: "index.html",
+	// 	},
+	// },
 	/* ##################################
 	 * js css version like: xx.js?v=xxxxx
 	 * ##################################

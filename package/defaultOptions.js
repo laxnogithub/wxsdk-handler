@@ -4,7 +4,7 @@
  * @Autor: lax
  * @Date: 2020-09-17 16:11:23
  * @LastEditors: lax
- * @LastEditTime: 2020-09-18 17:18:59
+ * @LastEditTime: 2020-09-19 17:58:48
  */
 module.exports = {
 	/* 默认申请API权限项 */
@@ -41,24 +41,12 @@ module.exports = {
 	/* 默认图片 */
 	IMG: "",
 
-	/* 默认后端服务器地址 */
-	SERVER_URL: "https://wx.server.1045fm.cn",
-
-	/* 默认后端测试服务器地址 */
-	TEST_SERVER_URL: "https://wxt.server.1045fm.cn",
-
 	/* 微信授权地址 */
 	AUTH_URL:
 		"https://open.weixin.qq.com/connect/oauth2/authorize?appid:APPID&redirect_uri:REDIRECT_URI&response_type:code&scope:SCOPE&state:STATE#wechat_redirect",
 
-	/* 默认测试用APPID */
-	TEST_APPID: "wx884d34049d77fcd1",
-
-	/* 默认生产环境APPID */
-	PRO_APPID: "wxbfaae54e7f89f3fa",
-
 	/* 默认后端服务器接口地址 */
-	REDIRECT_URI_PATH: "/wx/redirect",
+	REDIRECT_URI_PATH: "",
 
 	/* 默认状态参数 */
 	// DEFAULT_STATE : "",
