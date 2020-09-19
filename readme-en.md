@@ -1,12 +1,9 @@
-# wxsdk-handler
-[language: en](./readme-en.md)
-## 介绍
-基于jweixin的一个工具包，可用于日常html开发。
-同时也可以用于vue中。
+# info
+wxsdk tools for vue or html
 
-# 快速开始
+# quick start
 
-## 1. 使用vue的情况
+## 1. use vue
 
 ```
 import wxHandler from "wxsdk-handler";
@@ -18,7 +15,7 @@ Vue.use(wxHandler, {
 this.$wx.share().auth();
 ```
 
-## 2. 普通的情况
+## 2. normal
 
 ```
 import wxHandler from "wxsdk-handler";
@@ -29,32 +26,31 @@ new wxHandler({
 
 ```
 
-# 如何使用
+# how to use
 
-## 第一步: 导入工具包
+## step 1: import this tools
 
-### 1.使用vue的情况 (in: main.js)
+### 1.use vue (in: main.js)
 
 ```
 import wxHandler from "wxsdk-handler";
 Vue.use(wxHandler, { options } );
 ```
 
-### 2. 普通的情况
+### 2. normal
 
 ```
 import wxHandler from "wxsdk-handler";
 new wxHandler({ options });
 ```
 
-## 第二步: 设置属性
-选项的优先级如下显示：优先级高的将会覆盖低的配置
+## step 2: set options
 options = wx.js > options.config > default config
 
 
-### 1. 使用 wx.js
+### 1. use wx.js
 
-在你的项目根目录下创建 wx.js
+create wx.js in your ${workspace}/wx.js
 ```
 module.exports = {
 	appid: "xxxx",
@@ -63,7 +59,7 @@ module.exports = {
 };
 ```
 
-将你的 wx.js 文件路径加入到或直接导入到configFile
+add wx.js path to options.configFile
 ```
 options: {
     configFile: require("./../wx.js"),
@@ -72,7 +68,7 @@ options: {
 }
 ```
 
-### 2. 使用 options.config
+### 2. use options.config
 
 ```
 options: {
@@ -84,7 +80,7 @@ options: {
 };
 ```
 
-## 第三步: 设置分享的配置选项
+## step 3: set share config
 
 ```
 wx.share({
@@ -95,7 +91,7 @@ wx.share({
 
 ```
 
-## 第四步: 启动
+## step 4: run
 
 ```
 wx.share().auth();
@@ -107,48 +103,48 @@ wx.share().auth();
 ## configFile
 default: null
 
-微信配置文件的路径或本身
+wx config file or file path
 
 ## config
 
 ### config.debug
 default: debug
 
-是否启用debug模式
+debug mode : true or false
 
 ### config.indexUrl
 default: location.href
 
-网页的首页地址
+this html index url
 
 ### config.server
 default: http://localhost
 
-后端签名接口的域名
+back api server host
 
 ### config.path
 default: null
 
-插件将会自动请求后端签名接口
-接口的地址为域名+请求路径
+back api = config.server+config.path
+plugin will auto auth this api
 
 
 ### config.appid
 default: null
 
-微信sdk的appid
+wx appid
 
 ### config.scope
 default: snsapi_userinfo
 
-两个配置属性：snsapi_base/snsapi_userinfo
+can use snsapi_base/snsapi_userinfo
 
 ### config.over
 default: ()=>{
 	console.log("wx plugin is ready!");
 }
 
-wxsdk加载完毕后的回调函数
+wx ready callback function
 
 ### config.jsApi
 default: 
@@ -167,51 +163,51 @@ default:
 
 "onMenuShareWeibo"
 
-微信sdk的请求接口名称列表
+wxsdk api
 
 # share options
 
 ## title
 default: document.title
 
-微信分享的标题
+wx share title
 
 ## desc
 default: title
 
-微信分享的描述
+wx share desc
 
 ## link
 default: location.href
 
-微信分享的地址
+wx share link
 
 ## imgUrl
 default: null
 
-微信分享的缩略图
+wx share img url
 
 ## success
 default: null
 
-微信分享成功的回调函数
+wx share success function
 
 ## fail
 default: null
 
-微信分享失败的回调函数
+wx share fail function
 
 ## cancel
 default: null
 
-微信分享取消的回调函数
+wx share cancel function
 
 ## tigger
 default: null
 
-微信分享按钮点击的回调函数
+wx share tigger function
 
 ## complete
 default: null
 
-微信分享接口调用完成时候的回调函数
+wx share complete function
