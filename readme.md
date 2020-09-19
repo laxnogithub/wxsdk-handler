@@ -80,10 +80,21 @@ options: {
 };
 ```
 
-## step 3: run 
+## step 3: set share config
 
 ```
-wx.share(p).auth();
+wx.share({
+	title: "",
+	desc: ""
+	....
+});
+
+```
+
+## step 4: run
+
+```
+wx.share().auth();
 
 ```
 
