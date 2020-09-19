@@ -2,6 +2,31 @@
 
 # how to use
 
+## quick start
+
+### 1. use vue
+
+```
+import wxHandler from "wxsdk-handler";
+Vue.use(wxHandler, {
+	appid: xxx,
+	server: "xxx"
+} );
+
+this.$wx.share().auth();
+```
+
+### 2. normal
+
+```
+import wxHandler from "wxsdk-handler";
+new wxHandler({
+	appid: xxx,
+	server: xxx
+}).share().auth();
+
+```
+
 ## step 1: import this tools
 
 ### 1.use vue (in: main.js)
