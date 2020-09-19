@@ -108,7 +108,7 @@ wx config file or file path
 ## config
 
 ### config.debug
-default: debug
+default: false
 
 debug mode : true or false
 
