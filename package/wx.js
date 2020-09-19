@@ -4,7 +4,7 @@
  * @Autor: lax
  * @Date: 2020-09-18 15:28:37
  * @LastEditors: lax
- * @LastEditTime: 2020-09-19 19:00:38
+ * @LastEditTime: 2020-09-19 20:45:05
  */
 const DEFAULT = require("./defaultOptions.js");
 const axios = require("axios");
@@ -23,23 +23,24 @@ class wxHandler {
 	 * @function share
 	 * @description set share config
 	 * @param {*} p
-	 * @param {*} callback
+	 * @param {function} callback
 	 */
-	share(p = {}, callback) {
+	share(share = {}, callback = this.config.over) {
 		const self = this;
-		wxsdk.ready(() => {
+		wxsdk.ready(function () {
 			self.debug & console.log("wx-ready");
-			self.debug & console.log(p);
+			self.debug & console.log(share);
 			DEFAULT.API_LIST.forEach((api) => {
-				wxsdk[api](this.__getShareConfig(p));
+				const config = self.__getShareConfig(share);
+				const fun = wxsdk[api];
+				fun(config);
 			});
-			callback & callback();
+			callback();
 		});
 		wxsdk.error((res) => {
 			console.log("wxsdk load error:");
 			console.log(res);
 		});
-		this;
 		return this;
 	}
 	/**

@@ -80,15 +80,16 @@ options: {
 };
 ```
 
-## step 3: set share config
+## step 3: set share config and callback function
 
 ```
 wx.share({
 	title: "",
 	desc: ""
 	....
+},()=>{
+	console.log('plugin is ready to use')
 });
-
 ```
 
 ## step 4: run
@@ -152,16 +153,6 @@ default:
 "updateAppMessageShareData"
 
 "updateTimelineShareData"
-
-"onMenuShareTimeline"
-
-"onMenuShareAppMessage"
-
-"onMenuShareQQ"
-
-"onMenuShareQZone"
-
-"onMenuShareWeibo"
 
 wxsdk api
 

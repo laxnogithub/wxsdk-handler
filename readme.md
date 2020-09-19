@@ -29,6 +29,20 @@ new wxHandler({
 
 ```
 
+# 自定义使用
+一般情况下，调用share会自动请求并将相应配置输入wxsdk。
+如果需要自定义则：
+
+```
+const wxsdk = wx.wxsdk;
+wxsdk.ready(()=>{
+	wxsdk.updateAppMessageShareData();
+	...
+});
+wx.auth();
+
+```
+
 # 如何使用
 
 ## 第一步: 导入工具包
@@ -85,15 +99,16 @@ options: {
 };
 ```
 
-## 第三步: 设置分享的配置选项
+## 第三步: 设置分享的配置选项和成功后的回调函数
 
 ```
 wx.share({
 	title: "",
 	desc: ""
 	....
+},()=>{
+	console.log('plugin is ready to use')
 });
-
 ```
 
 ## 第四步: 启动
@@ -159,15 +174,6 @@ wxsdk加载完毕后的回调函数
 
 "updateTimelineShareData"
 
-"onMenuShareTimeline"
-
-"onMenuShareAppMessage"
-
-"onMenuShareQQ"
-
-"onMenuShareQZone"
-
-"onMenuShareWeibo"
 
 微信sdk的请求接口名称列表
 
