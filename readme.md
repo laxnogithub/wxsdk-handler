@@ -2,7 +2,7 @@
 
 # how to use
 
-## import this tools
+## step one: import this tools
 
 ### 1.use vue (in: main.js)
 
@@ -18,7 +18,7 @@ import wxHandler from "wxsdk-handler";
 new wxHandler({ options });
 ```
 
-## set options
+## step two: set options
 options = wx.js > options.config > default config
 
 
