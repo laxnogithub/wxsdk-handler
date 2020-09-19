@@ -8,19 +8,14 @@
 
 ```
 import wxHandler from "wxsdk-handler";
-Vue.use(wxHandler, { configFile: require("./../wx.js"),config: { debug: true} });
+Vue.use(wxHandler, { options } );
 ```
 
 2. normal
 
 ```
 import wxHandler from "wxsdk-handler";
-new wxHandler({
-    { 
-        configFile: require("./../wx.js"),
-        config: { debug: true}
-    }
-});
+new wxHandler({ options });
 ```
 
 ## set options
