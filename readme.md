@@ -54,62 +54,113 @@ options: {
 };
 ```
 
-### 3. default config
-
-```
-{
-	debug: false,
-	pro: false,
-	indexUrl: location.href,
-	server: "http://localhost:8080",
-	path: "",
-	appid: "",
-	scope: "snsapi_userinfo",
-	over: function () {
-		console.log("wx plugin is ready!");
-	},
-	jsApi: [
-		"updateAppMessageShareData",
-		"updateTimelineShareData",
-		"onMenuShareTimeline",
-		"onMenuShareAppMessage",
-		"onMenuShareQQ",
-		"onMenuShareQZone",
-		"onMenuShareWeibo",
-	],
-}
-```
-
 ## step 3: run 
 
-### 1. use vue
-
 ```
-this.$wx.share({
-	title: "title",
-	desc: "desc",
-}).auth();
-```
-
-### 2. normal
-   
-```
-new wxHandler().share(p).auth();
+wx.share(p).auth();
 
 ```
 
-## 3. default shareOptions
+# options
 
-```
-{
-	title: document.title,
-	desc: document.title,
-	link: location.href,
-	imgUrl: "",
-    success: null,
-    fail: null,
-    tigger: null,
-    complete: null,
-    cancel: null
+## configFile
+
+## config
+
+### config.debug
+default: debug
+
+debug mode : true or false
+
+### config.indexUrl
+default: location.href
+
+this html index url
+
+### config.server
+default: http://localhost
+
+back api server host
+
+### config.path
+default: null
+
+back api = config.server+config.path
+plugin will auto auth this api
+
+
+### config.appid
+default: null
+
+wx appid
+
+### config.scope
+default: snsapi_userinfo
+
+can use snsapi_base/snsapi_userinfo
+
+### config.over
+default: ()=>{
+	console.log("wx plugin is ready!");
 }
-```
+
+wx ready callback function
+
+### config.jsApi
+default: 
+	"updateAppMessageShareData"
+	"updateTimelineShareData"
+	"onMenuShareTimeline"
+	"onMenuShareAppMessage"
+	"onMenuShareQQ"
+	"onMenuShareQZone"
+	"onMenuShareWeibo"
+
+wxsdk api
+
+## share options
+
+### title
+default: document.title
+
+wx share title
+
+### desc
+default: title
+
+wx share desc
+
+### link
+default: location.href
+
+wx share link
+
+### imgUrl
+default: null
+
+wx share img url
+
+### success
+default: null
+
+wx share success function
+
+### fail
+default: null
+
+wx share fail function
+
+### cancel
+default: null
+
+wx share cancel function
+
+### tigger
+default: null
+
+wx share tigger function
+
+### complete
+default: null
+
+wx share complete function

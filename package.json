@@ -28,14 +28,21 @@
     "prettier": "^2.1.1",
     "sass": "^1.26.10",
     "sass-loader": "^10.0.2",
+    "vue": "^2.6.12",
     "vue-template-compiler": "^2.6.12",
-    "webpack-merge": "^5.1.4",
-    "vue": "^2.6.12"
+    "webpack-merge": "^5.1.4"
   },
   "dependencies": {
     "axios": "^0.20.0"
   },
-  "keywords":[
-    "vue","webpack","wx","wxsdk","jweixin","plugin","h5","handler"
+  "keywords": [
+    "vue",
+    "webpack",
+    "wx",
+    "wxsdk",
+    "jweixin",
+    "plugin",
+    "h5",
+    "handler"
   ]
 }

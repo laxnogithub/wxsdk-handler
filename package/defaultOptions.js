@@ -4,7 +4,7 @@
  * @Autor: lax
  * @Date: 2020-09-17 16:11:23
  * @LastEditors: lax
- * @LastEditTime: 2020-09-19 17:58:48
+ * @LastEditTime: 2020-09-19 18:59:39
  */
 module.exports = {
 	/* 默认申请API权限项 */
