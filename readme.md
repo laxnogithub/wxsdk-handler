@@ -113,7 +113,7 @@ wx.share().auth();
 ## config
 
 ### config.debug
-默认: debug
+默认: false
 
 是否启用debug模式
 
