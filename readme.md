@@ -1,10 +1,9 @@
 # info
+wxsdk tools for vue or html
 
-# how to use
+# quick start
 
-## quick start
-
-### 1. use vue
+## 1. use vue
 
 ```
 import wxHandler from "wxsdk-handler";
@@ -16,7 +15,7 @@ Vue.use(wxHandler, {
 this.$wx.share().auth();
 ```
 
-### 2. normal
+## 2. normal
 
 ```
 import wxHandler from "wxsdk-handler";
@@ -26,6 +25,8 @@ new wxHandler({
 }).share().auth();
 
 ```
+
+# how to use
 
 ## step 1: import this tools
 
