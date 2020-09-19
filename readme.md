@@ -4,14 +4,14 @@
 
 ## import this tools
 
-1.use vue (in: main.js)
+### 1.use vue (in: main.js)
 
 ```
 import wxHandler from "wxsdk-handler";
 Vue.use(wxHandler, { options } );
 ```
 
-2. normal
+### 2. normal
 
 ```
 import wxHandler from "wxsdk-handler";
