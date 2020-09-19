@@ -48,8 +48,8 @@ options: {
 options: {
     config: { 
         appid: "xxxx",
-	    server: "http://localhost:8001/",
-	    path: "wx/v2/sign",
+        server: "http://localhost:8001/",
+        path: "wx/v2/sign",
     }
 };
 ```
@@ -80,9 +80,9 @@ options: {
 }
 ```
 
-## run 
+## step 3: run 
 
-1. use vue (in:xxx.vue)
+### 1. use vue
 
 ```
 this.$wx.share({
@@ -91,14 +91,14 @@ this.$wx.share({
 }).auth();
 ```
 
-2. normal
+### 2. normal
    
 ```
 new wxHandler().share(p).auth();
 
 ```
 
-3. shareOptions
+## 3. default shareOptions
 
 ```
 {
