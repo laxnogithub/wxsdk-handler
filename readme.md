@@ -48,8 +48,9 @@ new wxHandler({ options });
 ```
 
 ## 第二步: 设置属性
-选项的优先级如下显示：优先级高的将会覆盖低的配置
-options = wx.js > options.config > default config
+选项的优先级如下：优先级高的将会覆盖低的配置
+
+wx.js > options.config > default config
 
 
 ### 1. 使用 wx.js
