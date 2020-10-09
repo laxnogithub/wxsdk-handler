@@ -2,13 +2,18 @@
   "name": "wxsdk-handler",
   "main": "package/wx.js",
   "description": "h5-微信封装工具",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": false,
   "license": "MIT",
   "author": {
     "name": "lax",
     "email": "1546356935@qq.com"
   },
+  "files": [
+    "./package/",
+    "./readme-en.md",
+    "./readme.md"
+  ],
   "scripts": {
     "serve": "vue-cli-service serve examples/main.js",
     "build": "vue-cli-service build",
