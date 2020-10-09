@@ -34,6 +34,7 @@ new wxHandler({
 如果需要自定义则：
 
 ```
+const wx = new wxHandler();
 const wxsdk = wx.wxsdk;
 wxsdk.ready(()=>{
 	wxsdk.updateAppMessageShareData();
@@ -73,8 +74,8 @@ wx.js > options.config > 默认 config
 ```
 module.exports = {
 	appid: "xxxx",
-	server: "http://localhost:8001/",
-	path: "wx/v2/sign",
+	server: "http://localhost/",
+	path: "wx/sign",
 };
 ```
 
@@ -93,8 +94,8 @@ options: {
 options: {
     config: { 
         appid: "xxxx",
-        server: "http://localhost:8001/",
-        path: "wx/v2/sign",
+        server: "http://localhost/",
+        path: "wx/sign",
     }
 };
 ```
@@ -114,7 +115,7 @@ wx.share({
 ## 第四步: 启动
 
 ```
-wx.share().auth();
+wx.auth();
 
 ```
 

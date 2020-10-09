@@ -4,20 +4,21 @@
  * @Autor: lax
  * @Date: 2020-09-18 15:28:37
  * @LastEditors: lax
- * @LastEditTime: 2020-09-19 20:45:05
+ * @LastEditTime: 2020-10-09 22:50:21
  */
 const DEFAULT = require("./defaultOptions.js");
 const axios = require("axios");
-/*  eslint-disable-next-line */
-const wxsdk = wx;
+const logger = require("./log/");
 
 class wxHandler {
 	constructor(p = {}) {
-		this.wxsdk = wxsdk;
+		this.wxsdk = this.__getSDK();
 		this.p = p;
 		this.config = this.__getConfig();
 		this.serverUrl = this.__getServerUrl();
 		this.indexUrl = this.config.indexUrl;
+		this.debug = this.config.debug;
+		this.__setLog();
 	}
 	/**
 	 * @function share
@@ -27,19 +28,22 @@ class wxHandler {
 	 */
 	share(share = {}, callback = this.config.over) {
 		const self = this;
-		wxsdk.ready(function () {
-			self.debug & console.log("wx-ready");
-			self.debug & console.log(share);
+		this.wxsdk.ready(function () {
+			logger.success("wx is ready");
+			const config = self.__getShareConfig(share);
+			logger.log("####### share config: #########");
+			logger.log(config);
+			logger.log("###############################");
 			DEFAULT.API_LIST.forEach((api) => {
-				const config = self.__getShareConfig(share);
-				const fun = wxsdk[api];
+				const fun = this.wxsdk[api];
 				fun(config);
 			});
 			callback();
 		});
-		wxsdk.error((res) => {
-			console.log("wxsdk load error:");
-			console.log(res);
+		this.wxsdk.error((res) => {
+			logger.error("##### wxsdk load error: #######");
+			logger.error(res);
+			logger.error("###############################");
 		});
 		return this;
 	}
@@ -51,11 +55,12 @@ class wxHandler {
 		axios
 			.get(this.serverUrl, { params: { url: this.indexUrl } })
 			.then((resp) => {
-				wxsdk.config(this.__generateWxConfig(resp.data));
+				this.wxsdk.config(this.__generateWxConfig(resp.data));
 			})
 			.catch((error) => {
-				console.log("wxsdk auth error:");
-				console.log(error);
+				logger.error("##### wxsdk auth error: #######");
+				logger.error(error.message);
+				logger.error("###############################");
 			});
 		return this;
 	}
@@ -69,6 +74,14 @@ class wxHandler {
 			.replace("SCOPE", this.config.scope)
 			.replace("STATE", this.indexUrl);
 		window.location.href = url;
+	}
+	/**
+	 * @function __setLog
+	 * @description set log state
+	 */
+	__setLog() {
+		if (this.debug) logger.resumeLogs();
+		if (!this.debug) logger.pauseLogs();
 	}
 	/**
 	 * @function __getShareConfig
@@ -131,8 +144,8 @@ class wxHandler {
 	 */
 	__defaultConfig() {
 		return {
-			debug: false,
-			pro: false,
+			debug: DEFAULT.DEBUG_STATE,
+			pro: DEFAULT.PRO_STATE,
 			indexUrl: this.__getURL(true),
 			server: "http://localhost:8080",
 			path: "",
@@ -169,6 +182,19 @@ class wxHandler {
 		if (baseUrl.indexOf("#") == -1) return baseUrl;
 		baseUrl = baseUrl.split("#/");
 		return baseUrl[0] + baseUrl[1];
+	}
+	/**
+	 * @function __getSDK
+	 * @description set wxsdk
+	 */
+	__getSDK() {
+		if (wx) return wx;
+		if (!wx) {
+			logger.error("######## wxsdk error: #########");
+			logger.error("wxsdk not find, please import jweixin.js");
+			logger.error("###############################");
+			return null;
+		}
 	}
 }
 

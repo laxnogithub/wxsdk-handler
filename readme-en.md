@@ -54,8 +54,8 @@ create wx.js in your ${workspace}/wx.js
 ```
 module.exports = {
 	appid: "xxxx",
-	server: "http://localhost:8001/",
-	path: "wx/v2/sign",
+	server: "http://localhost/",
+	path: "wx/sign",
 };
 ```
 
@@ -74,8 +74,8 @@ options: {
 options: {
     config: { 
         appid: "xxxx",
-        server: "http://localhost:8001/",
-        path: "wx/v2/sign",
+        server: "http://localhost/",
+        path: "wx/sign",
     }
 };
 ```
@@ -95,7 +95,7 @@ wx.share({
 ## step 4: run
 
 ```
-wx.share().auth();
+wx.auth();
 
 ```
 
