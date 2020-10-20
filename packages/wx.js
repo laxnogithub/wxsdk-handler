@@ -4,7 +4,7 @@
  * @Autor: lax
  * @Date: 2020-09-18 15:28:37
  * @LastEditors: lax
- * @LastEditTime: 2020-10-10 10:27:35
+ * @LastEditTime: 2020-10-20 11:22:07
  */
 const DEFAULT = require("./defaultOptions.js");
 const axios = require("axios");
@@ -26,10 +26,20 @@ class wxHandler {
 	 * @param {*} p
 	 * @param {function} callback
 	 */
-	share(share = {}, callback = this.config.over) {
+	share(
+		share = {},
+		complete = this.config.over,
+		success = this.config.success
+	) {
 		const self = this;
+		if (!this.__checkWX()) {
+			complete();
+			return this;
+		}
 		this.wxsdk.ready(function () {
+			logger.success("######## wx is ready ##########");
 			logger.success("wx is ready");
+			logger.success("###############################");
 			const config = self.__getShareConfig(share);
 			logger.log("####### share config: #########");
 			logger.log(config);
@@ -38,12 +48,14 @@ class wxHandler {
 				const fun = this.wxsdk[api];
 				fun(config);
 			});
-			callback();
+			success();
+			complete();
 		});
 		this.wxsdk.error((res) => {
 			logger.error("##### wxsdk load error: #######");
 			logger.error(res);
 			logger.error("###############################");
+			complete();
 		});
 		return this;
 	}
@@ -62,6 +74,7 @@ class wxHandler {
 				logger.error(error.message);
 				logger.error("###############################");
 			});
+
 		return this;
 	}
 	/**
@@ -152,6 +165,7 @@ class wxHandler {
 			appid: "",
 			scope: DEFAULT.SCOPE_TYPE[1],
 			over: DEFAULT.OVER,
+			success: DEFAULT.SUCCESS,
 			jsApi: DEFAULT.API_LIST,
 		};
 	}
@@ -194,6 +208,14 @@ class wxHandler {
 			logger.error("wxsdk not find, please import jweixin.js");
 			logger.error("###############################");
 			return null;
+		}
+	}
+	__checkWX() {
+		let ua = window.navigator.userAgent.toLowerCase();
+		if (ua.match(/MicroMessenger/i) == "micromessenger") {
+			return true;
+		} else {
+			return false;
 		}
 	}
 }

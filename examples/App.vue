@@ -4,10 +4,10 @@
  * @Autor: lax
  * @Date: 2020-04-07 20:45:54
  * @LastEditors: lax
- * @LastEditTime: 2020-09-19 20:40:27
+ * @LastEditTime: 2020-10-20 11:07:22
  -->
 <template>
-	<div id="app">123</div>
+	<div id="app">{{ data }}</div>
 </template>
 
 <style lang="scss">
@@ -31,14 +31,22 @@
 export default {
 	name: "vue",
 	data: () => {
-		return {};
+		return {
+			data: 0,
+		};
 	},
 	created() {
 		const wx = this.$wx;
-		wx.auth().share({
-			title: "1234",
-			desc: "desc",
-		});
+		wx.share(
+			{
+				title: "1234",
+				desc: "desc",
+			},
+			() => {
+				console.log("wx over");
+				this.data++;
+			}
+		).auth();
 	},
 };
 </script>

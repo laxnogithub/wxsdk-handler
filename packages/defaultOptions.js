@@ -4,15 +4,23 @@
  * @Autor: lax
  * @Date: 2020-09-17 16:11:23
  * @LastEditors: lax
- * @LastEditTime: 2020-09-19 20:36:09
+ * @LastEditTime: 2020-10-20 10:51:08
  */
+
+const logger = require("./log/");
+
 module.exports = {
 	/* 默认申请API权限项 */
 	API_LIST: ["updateAppMessageShareData", "updateTimelineShareData"],
 
+	/* 默认执行成功回调函数 */
+	SUCCESS: function () {
+		logger.success("wxsdk-handler plugin is ready!");
+	},
+
 	/* 默认执行完成回调函数 */
 	OVER: function () {
-		console.log("wxsdk-handler plugin is ready!");
+		logger.success("wxsdk-handler plugin is ready!");
 	},
 
 	/* 默认DEBUG模式 */
