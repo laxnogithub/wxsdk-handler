@@ -4,7 +4,7 @@
  * @Autor: lax
  * @Date: 2020-09-18 15:28:37
  * @LastEditors: lax
- * @LastEditTime: 2020-10-20 11:22:07
+ * @LastEditTime: 2020-11-03 22:40:36
  */
 const DEFAULT = require("./defaultOptions.js");
 const axios = require("axios");
@@ -32,7 +32,7 @@ class wxHandler {
 		success = this.config.success
 	) {
 		const self = this;
-		if (!this.__checkWX()) {
+		if (!this.checkWX()) {
 			complete();
 			return this;
 		}
@@ -130,13 +130,10 @@ class wxHandler {
 	}
 	/**
 	 * @function __getServerUrl
-	 * @description get back api
+	 * @description get back api with server + path
 	 */
 	__getServerUrl() {
 		return this.config.server + this.config.path;
-	}
-	__getWorkspace() {
-		return;
 	}
 	/**
 	 * @function __getConfig
@@ -159,7 +156,7 @@ class wxHandler {
 		return {
 			debug: DEFAULT.DEBUG_STATE,
 			pro: DEFAULT.PRO_STATE,
-			indexUrl: this.__getURL(true),
+			indexUrl: this.getURL(true),
 			server: "http://localhost:8080",
 			path: "",
 			appid: "",
@@ -186,11 +183,11 @@ class wxHandler {
 		return config_file;
 	}
 	/**
-	 * @function __getURL
+	 * @function getURL
 	 * @description get html url (true/false: contain #)
 	 * @param {*} is
 	 */
-	__getURL(is) {
+	getURL(is) {
 		let baseUrl = location.href;
 		if (!is) return baseUrl;
 		if (baseUrl.indexOf("#") == -1) return baseUrl;
@@ -210,13 +207,13 @@ class wxHandler {
 			return null;
 		}
 	}
-	__checkWX() {
+	/**
+	 * @function checkWX
+	 * @description check wx browser
+	 */
+	checkWX() {
 		let ua = window.navigator.userAgent.toLowerCase();
-		if (ua.match(/MicroMessenger/i) == "micromessenger") {
-			return true;
-		} else {
-			return false;
-		}
+		return ua.match(/MicroMessenger/i) == "micromessenger";
 	}
 }
 
