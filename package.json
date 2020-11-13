@@ -1,8 +1,8 @@
 {
   "name": "wxsdk-handler",
-  "main": "package/wx.js",
+  "main": "packages/wx.js",
   "description": "h5-微信封装工具",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "private": false,
   "license": "MIT",
   "author": {
