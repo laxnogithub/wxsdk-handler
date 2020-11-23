@@ -1,10 +1,10 @@
 /*
  * @Description: wxHandler
  * @Version: 1.0.0
- * @Autor: lax
+ * @Author: lax
  * @Date: 2020-09-18 15:28:37
  * @LastEditors: lax
- * @LastEditTime: 2020-11-03 22:40:36
+ * @LastEditTime: 2020-11-23 09:03:06
  */
 const DEFAULT = require("./defaultOptions.js");
 const axios = require("axios");
