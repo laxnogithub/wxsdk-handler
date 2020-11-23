@@ -17,7 +17,7 @@
   "scripts": {
     "serve": "vue-cli-service serve examples/main.js",
     "build": "vue-cli-service build",
-    "lib": "vue-cli-service build --target lib --name wxsdkHandler --dest lib packages/wx.js",
+    "lib": "vue-cli-service build --target lib --name wxsdk --dest lib packages/wx.js",
     "lint": "vue-cli-service lint",
     "test:e2e": "vue-cli-service test:e2e",
     "test:unit": "vue-cli-service test:unit"
