@@ -1,10 +1,10 @@
 /*
  * @Description: vue.config.js
  * @Version: 2.0.0
- * @Autor: lax
+ * @Author: lax
  * @Date: 2020-04-01 12:54:53
  * @LastEditors: lax
- * @LastEditTime: 2020-09-19 13:20:51
+ * @LastEditTime: 2020-11-23 09:52:08
  */
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require("path");
@@ -30,6 +30,7 @@ module.exports = {
 			output: {
 				filename: "js/[name].js?v=[hash:6]",
 				chunkFilename: "js/[name].js?v=[hash:6]",
+				libraryExport: "default",
 			},
 			plugins: [
 				new MiniCssExtractPlugin({
