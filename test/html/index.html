@@ -1,0 +1,25 @@
+<!--
+ * @Description: 
+ * @Version: 1.0.0
+ * @Author: lax
+ * @Date: 2020-11-23 11:43:03
+ * @LastEditors: lax
+ * @LastEditTime: 2020-11-23 11:46:52
+ * @FilePath: \wxtools\test\html\index.html
+-->
+<meta charset="utf-8">
+<title>wxsdk demo</title>
+<script src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+<script src="./wxsdk.umd.min.js"></script>
+
+
+<script>
+new wxsdk({
+    config:{
+		debug: true,
+		appid: "wxbfaae54e7f89f3fa",
+		server: "https://wxt.server.1045fm.cn/",
+		path: "wx/sign",
+    }
+}).share().auth();
+</script>
