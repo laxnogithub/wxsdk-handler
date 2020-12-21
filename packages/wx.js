@@ -4,7 +4,7 @@
  * @Author: lax
  * @Date: 2020-09-18 15:28:37
  * @LastEditors: lax
- * @LastEditTime: 2020-12-21 15:55:56
+ * @LastEditTime: 2020-12-21 16:15:08
  */
 const DEFAULT = require("./defaultOptions.js");
 const axios = require("axios");
@@ -45,7 +45,7 @@ class wxHandler {
 			logger.log(config);
 			logger.log("###############################");
 			DEFAULT.API_LIST.forEach((api) => {
-				const fun = this.wxsdk[api];
+				const fun = self.wxsdk[api];
 				fun(config);
 			});
 			success();

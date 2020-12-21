@@ -1,10 +1,10 @@
 <!--
  * @Description: 
  * @Version: 1.0.0
- * @Autor: lax
+ * @Author: lax
  * @Date: 2020-04-07 20:45:54
  * @LastEditors: lax
- * @LastEditTime: 2020-10-20 11:07:22
+ * @LastEditTime: 2020-12-21 16:14:59
  -->
 <template>
 	<div id="app">{{ data }}</div>
