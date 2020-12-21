@@ -4,7 +4,7 @@
  * @Author: lax
  * @Date: 2020-09-18 15:28:37
  * @LastEditors: lax
- * @LastEditTime: 2020-11-23 11:01:13
+ * @LastEditTime: 2020-12-21 15:55:56
  */
 const DEFAULT = require("./defaultOptions.js");
 const axios = require("axios");
@@ -217,7 +217,10 @@ class wxHandler {
 	}
 }
 
-export function install(Vue, options) {
+function install(Vue, options) {
+	console.log(options);
 	Vue.prototype.$wx = new wxHandler(options);
 }
+wxHandler.install = install;
+
 export default wxHandler;

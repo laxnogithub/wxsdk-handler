@@ -4,7 +4,7 @@
  * @Author: lax
  * @Date: 2020-04-08 08:48:09
  * @LastEditors: lax
- * @LastEditTime: 2020-11-23 11:45:09
+ * @LastEditTime: 2020-12-21 15:51:09
  */
 import Vue from "vue";
 import App from "./App.vue";
