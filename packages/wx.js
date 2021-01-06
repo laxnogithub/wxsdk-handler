@@ -4,7 +4,7 @@
  * @Author: lax
  * @Date: 2020-09-18 15:28:37
  * @LastEditors: lax
- * @LastEditTime: 2020-12-21 16:15:08
+ * @LastEditTime: 2021-01-06 19:04:55
  */
 const DEFAULT = require("./defaultOptions.js");
 const axios = require("axios");
@@ -156,7 +156,7 @@ class wxHandler {
 		return {
 			debug: DEFAULT.DEBUG_STATE,
 			pro: DEFAULT.PRO_STATE,
-			indexUrl: this.getURL(true),
+			indexUrl: this.getURL(),
 			server: "http://localhost:8080",
 			path: "",
 			appid: "",
@@ -187,12 +187,8 @@ class wxHandler {
 	 * @description get html url (true/false: contain #)
 	 * @param {*} is
 	 */
-	getURL(is) {
-		let baseUrl = location.href;
-		if (!is) return baseUrl;
-		if (baseUrl.indexOf("#") == -1) return baseUrl;
-		baseUrl = baseUrl.split("#/");
-		return baseUrl[0] + baseUrl[1];
+	getURL() {
+		return location.origin + location.pathname;
 	}
 	/**
 	 * @function __getSDK
