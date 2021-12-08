@@ -4,7 +4,7 @@
  * @Author: lax
  * @Date: 2020-09-18 15:28:37
  * @LastEditors: lax
- * @LastEditTime: 2021-12-06 22:43:54
+ * @LastEditTime: 2021-12-08 19:57:50
  */
 const DEFAULT = require("./defaultOptions.js");
 const axios = require("axios");
@@ -15,10 +15,18 @@ class wxHandler {
 		this.wxsdk = this.__getSDK();
 		this.p = p;
 		this.config = this.__getConfig();
+		this.over = this.config.over;
+		this.success = this.config.success;
 		this.serverUrl = this.__getServerUrl();
 		this.indexUrl = this.config.indexUrl;
 		this.debug = this.config.debug;
 		this.__setLog();
+	}
+	_ready() {
+		return new Promise((resolve, reject) => {
+			wx.ready(() => resolve());
+			wx.error((err) => reject(err));
+		});
 	}
 	/**
 	 * @function share
@@ -26,37 +34,34 @@ class wxHandler {
 	 * @param {*} p
 	 * @param {function} callback
 	 */
-	share(
-		share = {},
-		complete = this.config.over,
-		success = this.config.success
-	) {
+	share(share = {}, complete = this.over, success = this.success) {
 		const self = this;
 		if (!this.checkWX()) {
 			complete();
 			return this;
 		}
-		this.wxsdk.ready(function () {
-			logger.success("######## wx is ready ##########");
-			logger.success("wx is ready");
-			logger.success("###############################");
-			const config = self.__getShareConfig(share);
-			logger.log("####### share config: #########");
-			logger.log(config);
-			logger.log("###############################");
-			DEFAULT.API_LIST.forEach((api) => {
-				const fun = self.wxsdk[api];
-				fun(config);
+		this._ready()
+			.then(() => {
+				logger.success("######## wx is ready ##########");
+				logger.success("wx is ready");
+				logger.success("###############################");
+				const config = self.__getShareConfig(share);
+				logger.log("####### share config: #########");
+				logger.log(config);
+				logger.log("###############################");
+				DEFAULT.API_LIST.forEach((api) => {
+					const fun = self.wxsdk[api];
+					fun(config);
+				});
+				success();
+				complete();
+			})
+			.catch((err) => {
+				logger.error("##### wxsdk load error: #######");
+				logger.error(err);
+				logger.error("###############################");
+				complete();
 			});
-			success();
-			complete();
-		});
-		this.wxsdk.error((res) => {
-			logger.error("##### wxsdk load error: #######");
-			logger.error(res);
-			logger.error("###############################");
-			complete();
-		});
 		return this;
 	}
 	/**
