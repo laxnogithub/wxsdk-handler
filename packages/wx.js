@@ -4,7 +4,7 @@
  * @Author: lax
  * @Date: 2020-09-18 15:28:37
  * @LastEditors: lax
- * @LastEditTime: 2021-12-08 19:57:50
+ * @LastEditTime: 2022-01-30 19:08:01
  */
 const DEFAULT = require("./defaultOptions.js");
 const axios = require("axios");
@@ -192,8 +192,10 @@ class wxHandler {
 	 * @description get html url (true/false: contain #)
 	 * @param {*} is
 	 */
-	getURL() {
-		return location.origin + location.pathname;
+	getURL(is) {
+		// return location.origin + location.pathname;
+		let result = location.href;
+		return is ? result : result.split("#")[0];
 	}
 	/**
 	 * @function __getSDK
